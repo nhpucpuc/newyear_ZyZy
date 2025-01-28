@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc mừng</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('background2.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Dancing Script', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            text-align: center;
+            color: #990000;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .button-container {
+            margin-top: 15vh; /* Đặt bằng phần trăm chiều cao màn hình */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .btn {
+            width: 30vw; /* Tỉ lệ theo chiều rộng màn hình */
+            height: 30vh; /* Tỉ lệ theo chiều cao màn hình */
+            max-width: 520px; /* Giới hạn kích thước tối đa */
+            max-height: 360px;
+            background: url('lixi.png') no-repeat center center;
+            background-size: cover;
+            border: none;
+            cursor: pointer;
+        }
+
+        .container {
+            transform: translateY(10vh); /* Tỉ lệ dựa trên chiều cao màn hình */
+        }
+
+        .number {
+            font-family: 'Brush Script MT', cursive;
+            margin-top: 2vh; /* Điều chỉnh khoảng cách */
+            font-size: 2rem; /* Sử dụng rem để thích ứng */
+            font-weight: bold;
+            color: #FF3300;
+            text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .container h1 {
+            max-width: 80%; /* Tỉ lệ theo chiều rộng màn hình */
+            margin: 0 auto;
+            word-wrap: break-word;
+            font-size: 2.5rem; /* Sử dụng rem để font chữ tỉ lệ */
+            line-height: 1.4;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .highlight {
+            display: block;
+            margin-top: 2vh; /* Khoảng cách động */
+            font-size: 2rem; /* Font chữ tỉ lệ */
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* MEDIA QUERIES */
+        @media (max-width: 768px) {
+            .btn {
+                width: 40vw;
+                height: 25vh;
+            }
+
+            .number, .container h1, .highlight {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                transform: translateY(5vh);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn {
+                width: 50vw;
+                height: 20vh;
+            }
+
+            .number, .container h1, .highlight {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                transform: translateY(2vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="typing-text"></h1>
+        <span class="highlight" id="highlight-text"></span>
+        <div class="number" id="random-number"></div>
+    </div>
+    <div class="button-container" id="button-container">
+        <button class="btn" onclick="generateRandomNumber()"></button>
+    </div>
+
+    <script>
+        const text = "Năm mới anh chúc em phải lun zui zẻ hăm có được bùn linh ta linh tinh, ngày càng xink đẹp, bớt ovtk lại bỏ qua chịn cũ i và phải lun cười nhóoo😊";
+        const highlightText = "Bấm vô bao lì xì iiiiii";
+
+        const typingElement = document.getElementById('typing-text');
+        const highlightElement = document.getElementById('highlight-text');
+        const buttonContainer = document.getElementById('button-container');
+
+        let index = 0;
+        let highlightIndex = 0;
+
+        function typeText() {
+            if (index < text.length) {
+                typingElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeText, 50); 
+            } else if (highlightIndex < highlightText.length) {
+                highlightElement.innerHTML += highlightText.charAt(highlightIndex);
+                highlightIndex++;
+                setTimeout(typeText, 50); 
+            } else {
+                buttonContainer.style.opacity = 1; 
+            }
+        }
+
+        typeText();
+
+        let numberGenerated = false;
+        let lastNumber = null;
+
+        function generateRandomNumber() {
+            const numberElement = document.getElementById('random-number');
+
+            if (numberGenerated) {
+                numberElement.innerText = `Ê ê ê đừng có tham như z, hãy chấp nhận con số ${lastNumber}K đi 😌`;
+                return;
+            }
+
+            lastNumber = Math.floor(Math.random() * 100) + 1;
+            numberElement.innerText = `Wao hên z chài được ${lastNumber}K nè. Bấm lần nữa để ra số to hơn thì sao? 🤑`;
+            numberGenerated = true;
+        }
+    </script>
+</body>
+</html>
